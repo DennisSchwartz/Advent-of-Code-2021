@@ -1,4 +1,5 @@
 from typing import List
+import pandas as pd
 
 def get_bit_counts(nums: List[str]) -> List[List[int]]:
     bitcounts = []
@@ -24,33 +25,30 @@ def solution1(cmds):
     return int(gamma, 2) * int(epsilon, 2)
 
 
-def solution2(cmds):
-    bitcounts = get_bit_counts(cmds)
-    print(bitcounts)
-    ox = cmds
-    co2 = cmds
-    res_ox = None
-    res_co2 = None
-    for bit, counts in enumerate(bitcounts):
-        most_common = '1' if counts[1] >= counts[0] else '0'
-        if not res_ox:
-            ox = [b for b in ox if b[bit] == most_common]
-        if not res_co2:
-            co2 = [b for b in co2 if b[bit] != most_common]
-        if len(ox) == 1:
-            res_ox = ox[0]
-        if len(co2) == 1:
-            res_co2 = co2[0]
-        if res_ox and res_co2:
-            break
-    print(res_ox, res_co2)
-    print(int(res_ox, 2) * int(res_co2, 2), int(res_ox, 2), int(res_co2, 2))
-    return int(res_ox, 2) * int(res_co2, 2)
+def df2int(df: pd.DataFrame) -> int:
+    assert len(df) == 1
+    return int(''.join(list(df.iloc[0])), 2)
 
+
+def solution2(cmds):
+    ox = pd.DataFrame([list(cmd) for cmd in cmds])
+    co2 = ox.copy()
+
+    for col in range(ox.shape[1]):
+        if len(ox) > 1:
+            mode_ox = ox[col].mode()
+            ox = ox[ox[col] == mode_ox.max()]
+        if len(co2) > 1:
+            mode_co2 = co2[col].mode()
+            co2 = co2[co2[col] != mode_co2.max()]
+
+    ox.reset_index(inplace=True, drop=True)
+    co2.reset_index(inplace=True, drop=True)
+    return df2int(ox) * df2int(co2)
 
 
 if __name__ == '__main__':
-    with open('test.txt', 'r') as f:
+    with open('input.txt', 'r') as f:
         data = [line.strip() for line in f]
 
     res1 = solution1(data)
