@@ -1,0 +1,4 @@
+[0m[[0m[0mdebug[0m] [0m[0m[aoc-day1-build] Classpath dependencies List()[0m
+[0m[[0m[0mdebug[0m] [0m[0m[aoc-day1-build] Dependencies from configurations List()[0m
+[0m[[0m[0mdebug[0m] [0m[0mBloop wrote the configuration of project 'aoc-day1-build' to '/Users/ds/Code/advent-of-code-2021/day1/scala/aoc-day1/project/.bloop/aoc-day1-build.json'[0m
+[0m[[0m[32msuccess[0m] [0m[0mGenerated .bloop/aoc-day1-build.json[0m
