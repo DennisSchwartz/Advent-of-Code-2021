@@ -68,6 +68,7 @@ def translate_string(mapping, s: str) -> str:
     res = [mapping[char] for char in s]
     return ''.join(sorted(res))
 
+
 def solution2(lines):
     numbers_map = {
         'abcefg': '0',
@@ -104,8 +105,5 @@ if __name__ == '__main__':
 
     res2 = solution2(data)
     print(f'Solution Part 2: {res2}')
-    # with open('sorted.txt', 'w') as of:
-    #     for line in data:
-    #         new_line = ' '.join(list(map(sort_string, line.split())))
-    #         of.write(new_line + '\n')
+
 
